@@ -61,21 +61,23 @@
     }
   ],
   "post-processors": [
-    {
-      "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
-      "type": "vagrant"
-    },
-    {
-      "type": "atlas",
-      "token": "{{user `atlas_token`}}",
-      "artifact": "llabs/docker-base",
-      "artifact_type": "vagrant.box",
-      "metadata": {
-        "provider": "virtualbox",
-        "version": "{{user `version`}}",
-        "created_at": "{{timestamp}}"
+    [
+      {
+        "type": "vagrant",
+        "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
+        "keep_input_artifact": false
+      },
+      {
+        "type": "atlas",
+        "artifact": "llabs/docker-base",
+        "artifact_type": "vagrant.box",
+        "metadata": {
+          "provider": "virtualbox",
+          "version": "{{user `version`}}",
+          "created_at": "{{timestamp}}"
+        }
       }
-    }
+    ]
   ],
   "provisioners": [
     {
@@ -110,8 +112,6 @@
   ],
   "variables": {
     "box_basename": "ubuntu-14.04",
-    "build_timestamp": "{{isotime \"20060102150405\"}}",
-    "git_revision": "__unknown_git_revision__",
     "headless": "",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
@@ -125,6 +125,6 @@
     "no_proxy": "{{env `no_proxy`}}",
     "preseed_path": "ubuntu-14.04/preseed.cfg",
     "template": "ubuntu-14.04-amd64",
-    "version": "0.1.TIMESTAMP"
+    "version": "0.1.{{timestamp}}"
   }
 }

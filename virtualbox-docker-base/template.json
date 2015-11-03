@@ -64,6 +64,17 @@
     {
       "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
       "type": "vagrant"
+    },
+    {
+      "type": "atlas",
+      "token": "{{user `atlas_token`}}",
+      "artifact": "llabs/docker-base",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "version": "{{user `version`}}",
+        "created_at": "{{timestamp}}"
+      }
     }
   ],
   "provisioners": [
@@ -89,7 +100,10 @@
         "bento/scripts/ubuntu/vagrant.sh",
         "bento/scripts/common/vmtools.sh",
         "bento/scripts/ubuntu/cleanup.sh",
-        "bento/scripts/common/minimize.sh"
+        "bento/scripts/common/minimize.sh",
+        "../scripts/update_apt.sh",
+        "../scripts/install_python.sh",
+        "../scripts/install_ansible.sh",
       ],
       "type": "shell"
     }
@@ -111,6 +125,6 @@
     "no_proxy": "{{env `no_proxy`}}",
     "preseed_path": "ubuntu-14.04/preseed.cfg",
     "template": "ubuntu-14.04-amd64",
-    "version": "1.0.TIMESTAMP"
+    "version": "0.1.TIMESTAMP"
   }
 }

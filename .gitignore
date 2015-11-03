@@ -69,3 +69,6 @@ ansible/shared-roles
 
 # Do not save certificates here
 *.pem
+
+packer_cache
+

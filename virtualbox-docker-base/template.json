@@ -89,7 +89,10 @@
         "bento/scripts/ubuntu/vagrant.sh",
         "bento/scripts/common/vmtools.sh",
         "bento/scripts/ubuntu/cleanup.sh",
-        "bento/scripts/common/minimize.sh"
+        "bento/scripts/common/minimize.sh",
+        "../scripts/update_apt.sh",
+        "../scripts/install_python.sh",
+        "../scripts/install_ansible.sh",
       ],
       "type": "shell"
     }

@@ -1,0 +1,42 @@
+{
+  "_comment": "Builds an EBS-based AMI for the us-west-2 region.",
+  "variables": {
+    "aws_access_key": "",
+    "aws_secret_key": ""
+  },
+  "builders": [{
+    "type": "amazon-ebs",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+    "source_ami": "ami-86e605b5",
+    "instance_type": "m3.medium",
+    "ssh_username": "ubuntu",
+    "ami_name": "locationlabs/docker-base {{timestamp}}"
+  }],
+  "post-processors": [
+    [
+      {
+        "type": "atlas",
+        "artifact": "llabs/docker-base",
+        "artifact_type": "amazon.ami",
+        "metadata": {
+          "provider": "aws",
+          "version": "{{user `version`}}",
+          "created_at": "{{timestamp}}",
+          "aws_storage_type": "ebs",
+          "aws_region": "us-west-2"
+        }
+      }
+    ]
+  ],
+  "provisioners": [{
+    "type": "shell",
+    "execute_command": "{{ .Vars }} sudo -E /bin/bash '{{ .Path }}'",
+    "scripts": [
+      "scripts/update_apt.sh",
+      "scripts/install_python.sh",
+      "scripts/install_ansible.sh"
+    ]
+  }]
+}

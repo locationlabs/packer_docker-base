@@ -1,0 +1,13 @@
+---
+
+- name: pull busybox image
+  command: docker pull busybox
+
+- name: pull openvpn image
+  command: docker pull gosuri/openvpn
+
+- name: create openvpn configuration directory
+  file: path="/etc/openvpn/" state=directory
+
+- name: create openvpn data volume
+  command: docker run --name ovpn-data -v /etc/openvpn busybox

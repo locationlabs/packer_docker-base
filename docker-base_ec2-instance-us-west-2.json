@@ -1,0 +1,92 @@
+{
+  "_comment": "Builds an instance store based AMI for the us-west-2 region.",
+  "variables": {
+    "account_id": "{{env `AWS_ACCOUNT_ID`}}",
+    "aws_access_key": "",
+    "aws_secret_key": "",
+    "s3_bucket": "llabs-packer-images",
+    "x509_cert": "{{env `X509_CERT`}}",
+    "x509_key": "{{env `X509_KEY`}}",
+    "x509_cert_path": "cert.pem",
+    "x509_key_path": "key.pem",
+    "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
+  },
+  "builders": [{
+    "type": "amazon-instance",
+    "access_key": "{{user `aws_access_key`}}",
+    "secret_key": "{{user `aws_secret_key`}}",
+    "region": "us-west-2",
+    "source_ami": "ami-e8e102db",
+    "instance_type": "m3.medium",
+    "ssh_username": "ubuntu",
+    "ami_name": "locationlabs/docker-base {{timestamp}}",
+    "ami_virtualization_type": "hvm",
+    "account_id": "{{user `account_id`}}",
+    "s3_bucket": "{{user `s3_bucket`}}",
+    "x509_cert_path": "{{user `x509_cert_path`}}",
+    "x509_key_path": "{{user `x509_key_path`}}",
+    "bundle_vol_command": "sudo -n bash -c 'export EC2_HOME=/var/tmp/ec2 ; export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin:$EC2_HOME/bin ; ec2-bundle-vol -P mbr -k {{.KeyPath}} -u {{.AccountId}} -c {{.CertPath}} -r {{.Architecture}} -e /var/tmp/*,/tmp/* -p {{.Prefix}} --no-filter --no-filter --batch'",
+    "bundle_upload_command": "sudo -n bash -c 'export EC2_HOME=/var/tmp/ec2 ; export PATH=$PATH:/sbin:/usr/sbin:/usr/local/sbin:$EC2_HOME/bin ; ec2-upload-bundle -b {{.BucketName}} -m {{.ManifestPath}} -a {{user `aws_access_key`}} -s {{user `aws_secret_key`}} -d {{.BundleDirectory}} --batch --region {{.Region}} --retry'"
+  }],
+  "provisioners": [
+    {
+      "type": "shell",
+      "execute_command": "{{ .Vars }} sudo -E /bin/bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/update_apt.sh",
+        "scripts/install_python.sh",
+        "scripts/install_ansible.sh"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/packer.yml",
+      "extra_arguments": [
+        "--tags base"
+      ],
+      "playbook_dir": "ansible",
+      "staging_directory": "{{user `ansible_staging_dir`}}"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "sudo reboot",
+        "sleep 60"
+      ]
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{ .Vars }} sudo -E /bin/bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/enable_instance_store.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `ansible_staging_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ansible/requirements.yml",
+      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd {{user `ansible_staging_dir`}}",
+        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
+      ]
+    },
+
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/packer.yml",
+      "extra_arguments": [
+        "--tags aws,docker,docker-base,busybox"
+      ],
+      "playbook_dir": "ansible",
+      "staging_directory": "{{user `ansible_staging_dir`}}"
+    }]
+}

@@ -2,7 +2,8 @@
   "_comment": "Builds an EBS-based AMI for the us-west-2 region.",
   "variables": {
     "aws_access_key": "",
-    "aws_secret_key": ""
+    "aws_secret_key": "",
+    "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
   },
   "builders": [
     {
@@ -34,10 +35,6 @@
   ],
   "provisioners": [
     {
-      "type": "shell-local",
-      "command": "ansible-galaxy install -r ansible/requirements.yml -p ansible/shared-roles --force"
-    },
-    {
       "type": "shell",
       "execute_command": "{{ .Vars }} sudo -E /bin/bash '{{ .Path }}'",
       "scripts": [
@@ -47,12 +44,31 @@
       ]
     },
     {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `ansible_staging_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ansible/requirements.yml",
+      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd {{user `ansible_staging_dir`}}",
+        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
+      ]
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [
         "--tags base"
       ],
-      "playbook_dir": "ansible"
+      "playbook_dir": "ansible",
+      "staging_directory": "{{user `ansible_staging_dir`}}"
     },
     {
       "type": "shell",
@@ -62,12 +78,31 @@
       ]
     },
     {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `ansible_staging_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ansible/requirements.yml",
+      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd {{user `ansible_staging_dir`}}",
+        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
+      ]
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [
-        "--tags aws,docker,busybox"
+        "--tags aws,docker,docker-base,busybox"
       ],
-      "playbook_dir": "ansible"
+      "playbook_dir": "ansible",
+      "staging_directory": "{{user `ansible_staging_dir`}}"
     }
   ]
 }

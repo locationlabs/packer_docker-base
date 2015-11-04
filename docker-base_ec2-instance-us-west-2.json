@@ -1,12 +1,10 @@
 {
   "_comment": "Builds an instance store based AMI for the us-west-2 region.",
   "variables": {
-    "account_id": "{{env `AWS_ACCOUNT_ID`}}",
+    "account_id": "",
     "aws_access_key": "",
     "aws_secret_key": "",
     "s3_bucket": "llabs-packer-images",
-    "x509_cert": "{{env `X509_CERT`}}",
-    "x509_key": "{{env `X509_KEY`}}",
     "x509_cert_path": "cert.pem",
     "x509_key_path": "key.pem",
     "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
@@ -36,6 +34,24 @@
         "scripts/update_apt.sh",
         "scripts/install_python.sh",
         "scripts/install_ansible.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `ansible_staging_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ansible/requirements.yml",
+      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd {{user `ansible_staging_dir`}}",
+        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
       ]
     },
     {
@@ -79,7 +95,6 @@
         "ansible-galaxy install -r requirements.yml -p shared-roles --force"
       ]
     },
-
     {
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",

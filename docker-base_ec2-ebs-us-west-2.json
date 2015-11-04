@@ -44,24 +44,6 @@
       ]
     },
     {
-      "type": "shell",
-      "inline": [
-        "mkdir -p {{user `ansible_staging_dir`}}"
-      ]
-    },
-    {
-      "type": "file",
-      "source": "ansible/requirements.yml",
-      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
-    },
-    {
-      "type": "shell",
-      "inline": [
-        "cd {{user `ansible_staging_dir`}}",
-        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
-      ]
-    },
-    {
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [

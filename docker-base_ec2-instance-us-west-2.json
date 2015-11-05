@@ -1,9 +1,9 @@
 {
   "_comment": "Builds an instance store based AMI for the us-west-2 region.",
   "variables": {
-    "account_id": "",
-    "aws_access_key": "",
-    "aws_secret_key": "",
+    "account_id": "{{ env `AWS_ACCOUNT_ID` }}",
+    "aws_access_key": "{{ env `AWS_ACCESS_KEY` }}",
+    "aws_secret_key": "{{ env `AWS_SECRET_KEY` }}",
     "s3_bucket": "llabs-packer-images",
     "x509_cert_path": "cert.pem",
     "x509_key_path": "key.pem",
@@ -103,5 +103,24 @@
       ],
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"
-    }]
+    }],
+  "push": {
+    "name": "llabs/docker-base_ec2-instance-us-west-2"
+  },
+  "post-processors": [
+    [
+      {
+        "type": "atlas",
+        "artifact": "llabs/docker-base",
+        "artifact_type": "amazon.ami",
+        "metadata": {
+          "provider": "aws",
+          "version": "{{user `version`}}",
+          "created_at": "{{timestamp}}",
+          "aws_storage_type": "instance",
+          "aws_region": "us-west-2"
+        }
+      }
+    ]
+  ]
 }

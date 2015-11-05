@@ -17,22 +17,6 @@
       "ami_name": "locationlabs/docker-base {{timestamp}}"
     }
   ],
-  "post-processors": [
-    [
-      {
-        "type": "atlas",
-        "artifact": "llabs/docker-base",
-        "artifact_type": "amazon.ami",
-        "metadata": {
-          "provider": "aws",
-          "version": "{{user `version`}}",
-          "created_at": "{{timestamp}}",
-          "aws_storage_type": "ebs",
-          "aws_region": "us-west-2"
-        }
-      }
-    ]
-  ],
   "provisioners": [
     {
       "type": "shell",
@@ -104,5 +88,21 @@
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"
     }
+  ],
+  "post-processors": [
+    [
+      {
+        "type": "atlas",
+        "artifact": "llabs/docker-base",
+        "artifact_type": "amazon.ami",
+        "metadata": {
+          "provider": "aws",
+          "version": "{{user `version`}}",
+          "created_at": "{{timestamp}}",
+          "aws_storage_type": "ebs",
+          "aws_region": "us-west-2"
+        }
+      }
+    ]
   ]
 }

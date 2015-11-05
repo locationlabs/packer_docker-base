@@ -1,0 +1,30 @@
+---
+
+- name: setup base system behavior
+  hosts: all
+  roles:
+   - { role: base, tags: ['base'] }
+
+- name: setup AWS dependencies
+  hosts: all
+  roles:
+   - { role: aws, tags: ['aws'] }
+
+- name: setup docker
+  hosts: all
+  roles:
+    - { role: docker, tags: ['docker'] }
+    - { role: docker-base, tags: ['docker-base'] }
+
+# need to restart docker (flush handlers) before installing any images
+- name: pull busybox
+  hosts: all
+  tasks:
+    - command: docker pull busybox:latest
+  tags:
+    - busybox
+
+- name: setup openvpn
+  hosts: all
+  roles:
+    - { role: openvpn, tags: ['openvpn'] }

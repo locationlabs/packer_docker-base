@@ -103,5 +103,24 @@
       ],
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"
-    }]
+    }],
+  "push": {
+    "name": "llabs/docker-base_ec2-instance-us-west-2"
+  },
+  "post-processors": [
+    [
+      {
+        "type": "atlas",
+        "artifact": "llabs/docker-base",
+        "artifact_type": "amazon.ami",
+        "metadata": {
+          "provider": "aws",
+          "version": "{{user `version`}}",
+          "created_at": "{{timestamp}}",
+          "aws_storage_type": "instance",
+          "aws_region": "us-west-2"
+        }
+      }
+    ]
+  ]
 }

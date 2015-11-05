@@ -17,6 +17,7 @@
     "source_ami": "ami-e8e102db",
     "instance_type": "m3.medium",
     "ssh_username": "ubuntu",
+    "ami_groups": ["all"],
     "ami_name": "locationlabs/docker-base {{timestamp}}",
     "ami_virtualization_type": "hvm",
     "account_id": "{{user `account_id`}}",

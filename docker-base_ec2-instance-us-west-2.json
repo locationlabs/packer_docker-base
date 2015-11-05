@@ -1,7 +1,7 @@
 {
   "_comment": "Builds an instance store based AMI for the us-west-2 region.",
   "variables": {
-    "account_id": "",
+    "account_id": "{{ env `AWS_ACCOUNT_ID` }}",
     "aws_access_key": "",
     "aws_secret_key": "",
     "s3_bucket": "llabs-packer-images",

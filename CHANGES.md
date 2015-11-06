@@ -1,5 +1,8 @@
 # Release Change log
 
+Version 1.1:
+ - get Atlas to use git tag for virtualbox box version
+
 Version 1.0:
  - Migrated to github
  - Split off docker-base images into own repo

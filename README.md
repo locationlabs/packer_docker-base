@@ -13,8 +13,9 @@ deploys into the initial image to save time during deployment.
 
 ## Release Process
 
-This repo is using [git-flow][]. Once you release and push to master you need to get the definitions
-built by [Atlas][]. The process differs a bit for the EBS/Virtualbox and instance-store definitions:
+This repo is using [git-flow][]. Once you release and push to master (don't forget to push tags!)
+you need to get the definitions built by [Atlas][].
+The process differs a bit for the EBS/Virtualbox and instance-store definitions:
 
 ### EBS/Virtualbox definitions
 You're done. Atlas will trigger a build automatically when a push to master occurs.

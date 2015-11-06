@@ -108,6 +108,42 @@
         "scripts/install_ansible.sh"
       ],
       "type": "shell"
+    },
+    {
+      "type": "shell",
+      "execute_command": "{{ .Vars }} sudo -E /bin/bash '{{ .Path }}'",
+      "scripts": [
+        "scripts/update_apt.sh",
+        "scripts/install_python.sh",
+        "scripts/install_ansible.sh"
+      ]
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "mkdir -p {{user `ansible_staging_dir`}}"
+      ]
+    },
+    {
+      "type": "file",
+      "source": "ansible/requirements.yml",
+      "destination": "{{user `ansible_staging_dir`}}/requirements.yml"
+    },
+    {
+      "type": "shell",
+      "inline": [
+        "cd {{user `ansible_staging_dir`}}",
+        "ansible-galaxy install -r requirements.yml -p shared-roles --force"
+      ]
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "ansible/packer.yml",
+      "extra_arguments": [
+        "--tags base,docker,docker-base"
+      ],
+      "playbook_dir": "ansible",
+      "staging_directory": "{{user `ansible_staging_dir`}}"
     }
   ],
   "variables": {
@@ -125,6 +161,7 @@
     "no_proxy": "{{env `no_proxy`}}",
     "preseed_path": "ubuntu-14.04/preseed.cfg",
     "template": "ubuntu-14.04-amd64",
-    "version": "0.1.{{timestamp}}"
+    "version": "{{env `ATLAS_APPLICATION_GITHUB_TAG`}}",
+    "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
   }
 }

@@ -13,7 +13,6 @@
       "region": "us-west-2",
       "source_ami": "ami-2f899e4e",
       "instance_type": "m3.medium",
-      "iam_instance_profile": "packer-instance-read-s3",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],
       "ami_name": "locationlabs/docker-base {{timestamp}}"
@@ -91,6 +90,9 @@
       "staging_directory": "{{user `ansible_staging_dir`}}"
     }
   ],
+  "push": {
+    "name": "llabs/docker-base_ec2-ebs-us-west-2"
+  },
   "post-processors": [
     [
       {

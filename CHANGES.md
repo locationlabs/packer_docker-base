@@ -1,7 +1,7 @@
 # Release Change log
 
-Version 1.3:
- - Add instance profile
+Version 1.4:
+ - Use CodeDeploy agent install via HTTP
 
 Version 1.2:
  - Add CodeDeploy Agent for AWS

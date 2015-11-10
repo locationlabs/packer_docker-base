@@ -1,6 +1,9 @@
 # Release Change log
 
-Version 1.1:
+Version 1.3:
+ - Add instance profile
+
+Version 1.2:
  - Add CodeDeploy Agent for AWS
  - Switch to Ubuntu Cloud image base AMIs
 

@@ -1,5 +1,8 @@
 # Release Change Log
 
+Version 1.2:
+ - Rewrite CodeDeploy install via HTTP
+
 Version 1.1:
  - Add CodeDeploy agent to AWS
 

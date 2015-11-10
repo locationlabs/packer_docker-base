@@ -1,4 +1,25 @@
 ---
 
-- name: install awscli
-  pip: name=awscli
+- name: install apt dependencies
+  apt:
+    name: "{{ item }}"
+    update_cache: yes
+  with_items:
+    - awscli
+    - ruby2.0
+
+- name: fetch codedeploy install script
+  command: "aws s3 cp s3://aws-codedeploy-{{ aws_code_deploy_region }}/latest/install . --region {{ aws_code_deploy_region }}"
+  args:
+    chdir: "{{ aws_code_deploy_home_dir }}"
+
+- name: make codedeploy install script executable
+  file: path="{{ aws_code_deploy_home_dir }}/install" state=file mode=u+x
+
+- name: install codedeploy agent
+  command: "{{ aws_code_deploy_home_dir }}/install auto"
+  notify:
+    - restart codedeploy-agent
+
+- name: start codedeploy-agent
+  service: name=codedeploy-agent state=started

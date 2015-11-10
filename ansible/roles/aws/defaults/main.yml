@@ -1,0 +1,4 @@
+---
+
+aws_code_deploy_region: "us-west-2"
+aws_code_deploy_home_dir: /home/ubuntu

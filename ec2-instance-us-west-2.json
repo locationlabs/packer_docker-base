@@ -16,6 +16,7 @@
     "region": "us-west-2",
     "source_ami": "ami-20819641",
     "instance_type": "m3.medium",
+    "iam_instance_profile": "packer-instance-read-s3",
     "ssh_username": "ubuntu",
     "ami_groups": ["all"],
     "ami_name": "locationlabs/docker-base {{timestamp}}",

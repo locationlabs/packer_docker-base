@@ -1,5 +1,8 @@
 # Release Change log
 
+Version 1.6:
+ - also install git on virtualbox
+
 Version 1.5:
  - replace ansible subtree with simpler playbook and more galaxy roles
  - install git in all base images

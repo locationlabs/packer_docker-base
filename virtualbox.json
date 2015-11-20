@@ -115,7 +115,8 @@
       "scripts": [
         "scripts/update_apt.sh",
         "scripts/install_python.sh",
-        "scripts/install_ansible.sh"
+        "scripts/install_ansible.sh",
+        "scripts/install_git.sh"
       ]
     },
     {

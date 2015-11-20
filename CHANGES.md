@@ -1,5 +1,9 @@
 # Release Change log
 
+Version 1.5:
+ - replace ansible subtree with simpler playbook and more galaxy roles
+ - install git in all base images
+
 Version 1.4:
  - Use CodeDeploy agent install via HTTP
 

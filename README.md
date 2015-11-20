@@ -44,18 +44,6 @@ This repo is using git subtrees to pull in dependencies. Why not submodules?
 Well, they're horrible for one. Subtrees are much simpler, you don't need
 to run any extra commands, just clone as usual and everything is there.
 
-### packer-ansible subtree
-Subtree for https://github.com/locationlabs/packer-ansible
-
-To update run the following:
-
-```
-git subtree pull --prefix ansible https://github.com/locationlabs/packer-ansible master --squash
-```
-
-Always use the `master` branch of [packer-ansible][] so that you're getting the latest
-released version (or use a tag).
-
 ### chef/bento subtree
 The vagrant image is heavily based on [Chef]'s excellent work on their [bento][]
 packer definitions. So much so that we use their scripts directly from our definitions.
@@ -67,7 +55,6 @@ git subtree pull --prefix bento https://github.com/chef/bento.git 2.2.2 --squash
 
 Only use [bento release tags][] when updating `bento`.
 
-[packer-ansible]: https://github.com/locationlabs/packer-ansible
 [bento]: https://github.com/chef/bento
 [bento release tags]: https://github.com/chef/bento/tags
 [Chef]: http://chef.io

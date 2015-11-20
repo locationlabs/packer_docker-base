@@ -1,5 +1,24 @@
-- src: https://github.com/locationlabs/ansible-role_docker/archive/2.0.tar.gz
+- src: https://github.com/locationlabs/ansible-role_ubuntu-base.git
+  version: master
+  scm: git
+  name: ubuntu-base
+
+- src: https://github.com/locationlabs/ansible-role_aws-codedeploy.git
+  version: master
+  scm: git
+  name: aws-codedeploy
+
+- src: https://github.com/locationlabs/ansible-role_docker.git
+  version: master
+  scm: git
   name: docker
 
-- src: https://github.com/locationlabs/ansible-role_docker-base/archive/2.0.tar.gz
+- src: https://github.com/locationlabs/ansible-role_docker-base.git
+  version: master
+  scm: git
   name: docker-base
+
+- src: https://github.com/locationlabs/ansible-role_ntp.git
+  version: master
+  scm: git
+  name: ntp

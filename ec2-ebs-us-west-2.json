@@ -25,7 +25,8 @@
       "scripts": [
         "scripts/update_apt.sh",
         "scripts/install_python.sh",
-        "scripts/install_ansible.sh"
+        "scripts/install_ansible.sh",
+        "scripts/install_git.sh"
       ]
     },
     {
@@ -50,7 +51,7 @@
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [
-        "--tags base"
+        "--tags aws-pre"
       ],
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"
@@ -84,7 +85,7 @@
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [
-        "--tags aws,docker,docker-base,busybox"
+        "--tags aws"
       ],
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"

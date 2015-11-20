@@ -1,5 +1,8 @@
 # Release Change log
 
+Version 1.7:
+ - install docker 1.8.3
+
 Version 1.6:
  - also install git on virtualbox
 

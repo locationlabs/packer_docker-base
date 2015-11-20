@@ -3,28 +3,20 @@
 - name: setup base system behavior
   hosts: all
   roles:
-   - { role: base, tags: ['base'] }
+   - { role: ubuntu-base, tags: ['aws-pre', 'virtualbox'] }
 
-- name: setup AWS dependencies
+- name: setup AWS CodeDeploy
   hosts: all
   roles:
-   - { role: aws, tags: ['aws'] }
+   - { role: aws-codedeploy, tags: ['aws'] }
 
 - name: setup docker
   hosts: all
   roles:
-    - { role: docker, tags: ['docker'] }
-    - { role: docker-base, tags: ['docker-base'] }
+    - { role: docker, tags: ['aws', 'virtualbox'] }
+    - { role: docker-base, tags: ['aws', 'virtualbox'] }
 
-# need to restart docker (flush handlers) before installing any images
-- name: pull busybox
-  hosts: all
-  tasks:
-    - command: docker pull busybox:latest
-  tags:
-    - busybox
-
-- name: setup openvpn
+- name: setup ntp
   hosts: all
   roles:
-    - { role: openvpn, tags: ['openvpn'] }
+    - { role: ntp, tags: ['aws', 'virtualbox'] }

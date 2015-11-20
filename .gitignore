@@ -71,4 +71,4 @@ ansible/shared-roles
 *.pem
 
 packer_cache
-
+Vagrantfile

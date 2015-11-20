@@ -140,7 +140,7 @@
       "type": "ansible-local",
       "playbook_file": "ansible/packer.yml",
       "extra_arguments": [
-        "--tags base,docker,docker-base"
+        "--tags virtualbox"
       ],
       "playbook_dir": "ansible",
       "staging_directory": "{{user `ansible_staging_dir`}}"

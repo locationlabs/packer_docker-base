@@ -11,7 +11,7 @@
       "access_key": "{{user `aws_access_key`}}",
       "secret_key": "{{user `aws_secret_key`}}",
       "region": "us-west-2",
-      "source_ami": "ami-2f899e4e",
+      "source_ami": "ami-d22535b3",
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],

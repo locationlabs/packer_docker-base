@@ -11,6 +11,13 @@ base images and applying the *same* provisioning steps using Ansible. This appro
 switch between AWS and Vagrant with little overhead and push common elements of Ansible-based
 deploys into the initial image to save time during deployment.
 
+## Source AMI
+
+We are using Ubuntu Trusty 14.04 cloud images as our source AMI. To update to a newer
+version go to https://cloud-images.ubuntu.com/trusty/current/ and find
+the 64-bit image for the region you need (e.g. us-west-2). For EBS builds pick the `hvm-ssd`
+image, for instance-store builds use the `instance` image.
+
 ## Release Process
 
 This repo is using [git-flow][]. Once you release and push to master (don't forget to push tags!)

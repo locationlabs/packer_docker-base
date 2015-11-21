@@ -1,5 +1,8 @@
 # Release Change log
 
+Version 1.8:
+ - update source Ubuntu 14.04.3 AMI
+
 Version 1.7:
  - install docker 1.8.3
 

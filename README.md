@@ -37,6 +37,11 @@ export ATLAS_TOKEN=<your Atlas token>
 packer push ec2-instance-us-west-2.json
 ```
 
+## Versioning
+When releasing, make sure to use [semver][] but only use major, minor versions
+as the patch version will be inserted in Virtualbox builds automatically (using
+the build number).
+
 ## Artifacts
 
 Once Atlas is done building you can find the latest images here:

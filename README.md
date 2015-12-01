@@ -20,8 +20,7 @@ image, for instance-store builds use the `instance` image.
 
 ## Release Process
 
-This repo is using [git-flow][]. Once you release and push to master (don't forget to push tags!)
-you need to get the definitions built by [Atlas][].
+Once your changes are merged to master you need to get the definitions built by [Atlas][].
 The process differs a bit for the EBS/Virtualbox and instance-store definitions:
 
 ### EBS/Virtualbox definitions
@@ -71,6 +70,5 @@ Only use [bento release tags][] when updating `bento`.
 [bento release tags]: https://github.com/chef/bento/tags
 [Chef]: http://chef.io
 [Atlas]: https://atlas.hashicorp.com
-[git-flow]: https://github.com/nvie/gitflow
 [Virtualbox Boxes]: https://atlas.hashicorp.com/llabs/boxes/docker-base
 [AWS AMIs]: https://atlas.hashicorp.com/llabs/artifacts/docker-base/types/amazon.ami

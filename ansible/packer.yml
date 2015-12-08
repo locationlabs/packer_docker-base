@@ -1,12 +1,5 @@
 ---
 
-- name: gather all facts
-  hosts: all 
-  tasks:
-    - debug: msg=ok
-  tags:
-    - facts
-
 - name: setup base system behavior
   hosts: all
   roles:

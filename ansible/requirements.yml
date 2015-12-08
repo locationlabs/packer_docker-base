@@ -22,3 +22,13 @@
   version: master
   scm: git
   name: ntp
+
+- src: https://github.com/locationlabs/ansible-role_kdump
+  version: master
+  scm: git
+  name: kdump
+
+- src: https://github.com/locationlabs/ansible-role_increase-log-retention
+  version: master
+  scm: git
+  name: increase-log-retention

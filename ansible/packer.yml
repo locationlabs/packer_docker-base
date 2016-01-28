@@ -4,8 +4,6 @@
   hosts: all
   roles:
    - { role: ubuntu-base, tags: ['aws-pre', 'virtualbox'] }
-   - { role: kdump, tags: ['aws-pre', 'virtualbox'] }
-   - { role: increase-log-retention, tags: ['aws-pre', 'virtualbox'] }
 
 - name: setup AWS CodeDeploy
   hosts: all

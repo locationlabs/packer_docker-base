@@ -3,6 +3,7 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
+    "ami_regions": "us-west-2,us-east-1",
     "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
   },
   "builders": [
@@ -15,7 +16,8 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],
-      "ami_name": "locationlabs/docker-base {{timestamp}}"
+      "ami_name": "locationlabs/docker-base {{timestamp}}",
+      "ami_regions": "{{user `ami_regions`}}"
     }
   ],
   "provisioners": [
@@ -91,23 +93,23 @@
       "staging_directory": "{{user `ansible_staging_dir`}}"
     }
   ],
-  "push": {
-    "name": "llabs/docker-base_ec2-ebs-us-west-2"
-  },
-  "post-processors": [
-    [
-      {
-        "type": "atlas",
-        "artifact": "llabs/docker-base",
-        "artifact_type": "amazon.ami",
-        "metadata": {
-          "provider": "aws",
-          "version": "{{user `version`}}",
-          "created_at": "{{timestamp}}",
-          "aws_storage_type": "ebs",
-          "aws_region": "us-west-2"
+    "push": {
+      "name": "llabs/docker-base_ec2-ebs-us-west-2"
+    },
+    "post-processors": [
+      [
+        {
+          "type": "atlas",
+          "artifact": "llabs/docker-base",
+          "artifact_type": "amazon.ami",
+          "metadata": {
+            "provider": "aws",
+            "version": "{{user `version`}}",
+            "created_at": "{{timestamp}}",
+            "aws_storage_type": "ebs",
+            "aws_regions": "{{user `ami_regions`}}"
+          }
         }
-      }
+      ]
     ]
-  ]
 }

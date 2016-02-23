@@ -14,9 +14,14 @@ deploys into the initial image to save time during deployment.
 ## Source AMI
 
 We are using Ubuntu Trusty 14.04 cloud images as our source AMI. To update to a newer
-version go to https://cloud-images.ubuntu.com/trusty/current/ and find
-the 64-bit image for the region you need (e.g. us-west-2). For EBS builds pick the `hvm-ssd`
+version go to http://cloud-images.ubuntu.com/query/trusty/server/released.current.txt and find
+the 64-bit (amd64) image for the us-west-2 region. Pick the `hvm-ssd`
 image.
+
+A shortcut to find the right AMI:
+```
+curl -s http://cloud-images.ubuntu.com/query/trusty/server/released.current.txt |grep ebs-ssd |grep amd64 |grep hvm |grep us-west-2 |cut -f8 -d$'\t'
+```
 
 ### EBS vs Instance-store
 We no longer support instance-store images as they are a pain. Use EBS.

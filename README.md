@@ -16,25 +16,14 @@ deploys into the initial image to save time during deployment.
 We are using Ubuntu Trusty 14.04 cloud images as our source AMI. To update to a newer
 version go to https://cloud-images.ubuntu.com/trusty/current/ and find
 the 64-bit image for the region you need (e.g. us-west-2). For EBS builds pick the `hvm-ssd`
-image, for instance-store builds use the `instance` image.
+image.
+
+### EBS vs Instance-store
+We no longer support instance-store images as they are a pain. Use EBS.
 
 ## Release Process
 
-Once your changes are merged to master you need to get the definitions built by [Atlas][].
-The process differs a bit for the EBS/Virtualbox and instance-store definitions:
-
-### EBS/Virtualbox definitions
-You're done. Atlas will trigger a build automatically when a push to master occurs.
-
-### Instance-store definitions
-Here Atlas needs some secure information, namely a X.509 key/cert that can only be passed by file,
-so for this to work you need to get access to those, place them in the root of this repo as
-`key.pem` and `cert.pem` (which are gitignored), and run
-
-```
-export ATLAS_TOKEN=<your Atlas token>
-packer push ec2-instance-us-west-2.json
-```
+Once your changes are merged to master [Atlas][] will trigger a build automatically.
 
 ## Artifacts
 

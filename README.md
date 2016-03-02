@@ -13,10 +13,9 @@ deploys into the initial image to save time during deployment.
 
 ## Source AMI
 
-We are using Ubuntu Trusty 14.04 cloud images as our source AMI. To update to a newer
+We are using Ubuntu Trusty 14.04 [cloud images][] as our source AMI. To update to a newer
 version go to http://cloud-images.ubuntu.com/query/trusty/server/released.current.txt and find
-the 64-bit (amd64) image for the us-west-2 region. Pick the `hvm-ssd`
-image.
+the 64-bit (amd64), ebs-ssd, hvm image in the us-west-2 region.
 
 A shortcut to find the right AMI:
 ```
@@ -61,3 +60,4 @@ Only use [bento release tags][] when updating `bento`.
 [Atlas]: https://atlas.hashicorp.com
 [Virtualbox Boxes]: https://atlas.hashicorp.com/llabs/boxes/docker-base
 [AWS AMIs]: https://atlas.hashicorp.com/llabs/artifacts/docker-base/types/amazon.ami
+[cloud images]: https://help.ubuntu.com/community/UEC/Images

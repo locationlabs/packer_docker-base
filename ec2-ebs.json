@@ -16,7 +16,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],
-      "ami_name": "locationlabs/docker-base {{timestamp}}",
+      "ami_name": "locationlabs/docker-base {{isotime}}",
       "ami_regions": "{{user `ami_regions`}}"
     }
   ],
@@ -105,7 +105,7 @@
           "metadata": {
             "provider": "aws",
             "version": "{{user `version`}}",
-            "created_at": "{{timestamp}}",
+            "created_at": "{{isotime}}",
             "aws_storage_type": "ebs",
             "aws_regions": "{{user `ami_regions`}}"
           }

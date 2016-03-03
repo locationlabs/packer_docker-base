@@ -16,7 +16,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],
-      "ami_name": "locationlabs/docker-base {{isotime}}",
+      "ami_name": "locationlabs/docker-base {{isotime | clean_ami_name}}",
       "ami_regions": "{{user `ami_regions`}}"
     }
   ],

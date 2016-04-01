@@ -3,7 +3,7 @@
   "variables": {
     "aws_access_key": "",
     "aws_secret_key": "",
-    "ami_regions": "us-west-2,us-east-1",
+    "ami_regions": "us-west-2,us-east-1,ap-southeast-2",
     "ansible_staging_dir": "/tmp/ansible-staging.{{timestamp}}"
   },
   "builders": [

@@ -22,6 +22,10 @@ A shortcut to find the right AMI:
 curl -s http://cloud-images.ubuntu.com/query/trusty/server/released.current.txt |grep ebs-ssd |grep amd64 |grep hvm |grep us-west-2 |cut -f8 -d$'\t'
 ```
 
+## Source ISO (for Vagrant)
+
+Check http://releases.ubuntu.com for the latest 14.04 release and checksum.
+
 ### EBS vs Instance-store
 We no longer support instance-store images as they are a pain. Use EBS.
 

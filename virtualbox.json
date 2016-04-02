@@ -152,7 +152,7 @@
     "headless": "",
     "http_proxy": "{{env `http_proxy`}}",
     "https_proxy": "{{env `https_proxy`}}",
-    "iso_checksum": "7d9337e7b19d74b197100035ffa4318999e2d6a875bba020cfe197faeb98e904",
+    "iso_checksum": "07e4bb5569814eab41fafac882ba127893e3ff0bdb7ec931c9b2d040e3e94e7a",
     "iso_checksum_type": "sha256",
     "iso_name": "ubuntu-14.04.4-server-amd64.iso",
     "metadata": "bento/floppy/dummy_metadata.json",

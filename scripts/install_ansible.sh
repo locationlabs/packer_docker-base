@@ -8,5 +8,5 @@
 #
 #   - `install_python.sh`
 
-echo "Installing ansible..."
-pip install ansible
+echo "Installing ansible>=1.9.4,<2.0..."
+pip install "ansible>=1.9.4,<2.0"

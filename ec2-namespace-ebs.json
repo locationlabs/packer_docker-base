@@ -16,7 +16,7 @@
       "instance_type": "m3.medium",
       "ssh_username": "ubuntu",
       "ami_groups": ["all"],
-      "ami_name": "locationlabs/docker-base {{isotime | clean_ami_name}}",
+      "ami_name": "locationlabs/docker-namespaced-base {{isotime | clean_ami_name}}",
       "ami_regions": "{{user `ami_regions`}}"
     }
   ],
@@ -51,7 +51,7 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "ansible/packer.yml",
+      "playbook_file": "ansible/packer-docker-namespaced.yml",
       "extra_arguments": [
         "--tags aws-pre"
       ],
@@ -85,7 +85,7 @@
     },
     {
       "type": "ansible-local",
-      "playbook_file": "ansible/packer.yml",
+      "playbook_file": "ansible/packer-docker-namespaced.yml",
       "extra_arguments": [
         "--tags aws"
       ],
@@ -94,13 +94,13 @@
     }
   ],
     "push": {
-      "name": "llabs/docker-base_ec2-ebs-us-west-2"
+      "name": "llabs/docker-namespaced-base_ec2-ebs-us-west-2"
     },
     "post-processors": [
       [
         {
           "type": "atlas",
-          "artifact": "llabs/docker-base",
+          "artifact": "llabs/docker-namespaced-base",
           "artifact_type": "amazon.ami",
           "metadata": {
             "provider": "aws",

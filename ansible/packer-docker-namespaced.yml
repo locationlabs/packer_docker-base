@@ -1,0 +1,5 @@
+---
+
+- include: packer.yml
+  vars:
+    docker_opts: "-s overlay --userns-remap=default"

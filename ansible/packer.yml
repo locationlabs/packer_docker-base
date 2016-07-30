@@ -16,6 +16,16 @@
     - { role: docker, tags: ['aws', 'virtualbox'] }
     - { role: docker-base, tags: ['aws', 'virtualbox'] }
 
+- name: Remove generated Docker ID
+  hosts: all
+  tasks:
+      # Our VMs are all from the same image that already has Docker installed so their
+      # IDs are the same. We need to regenerate them.
+      file: path=/etc/docker/key.json state=absent
+  tags:
+    - aws
+    - virtualbox
+
 - name: setup ntp
   hosts: all
   roles:

@@ -1,7 +1,7 @@
 ---
 
-docker_version: 1.11.1
-docker_py_version: 1.8.1
+docker_version: 1.12.0
+docker_py_version: 1.9.0
 
 # Note if you are changing this then update the packer-docker-namespaced.yml correspondingly
 docker_opts: "-s overlay"

@@ -3,11 +3,6 @@
   scm: git
   name: ubuntu-base
 
-- src: https://github.com/locationlabs/ansible-role_aws-codedeploy.git
-  version: master
-  scm: git
-  name: aws-codedeploy
-
 - src: https://github.com/locationlabs/ansible-role_docker.git
   version: master
   scm: git

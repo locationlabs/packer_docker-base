@@ -5,11 +5,6 @@
   roles:
    - { role: ubuntu-base, tags: ['aws-pre', 'virtualbox'] }
 
-- name: setup AWS CodeDeploy
-  hosts: all
-  roles:
-   - { role: aws-codedeploy, tags: ['aws'] }
-
 - name: setup docker
   hosts: all
   roles:

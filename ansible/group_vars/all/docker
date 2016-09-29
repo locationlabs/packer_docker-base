@@ -1,7 +1,11 @@
 ---
 
-docker_version: 1.12.0
-docker_py_version: 1.9.0
+docker_version: 1.12.1
+requests_version: 2.7.0
+docker_py_version: "latest"
+docker_compose_version: "latest"
 
 # Note if you are changing this then update the packer-docker-namespaced.yml correspondingly
 docker_opts: "-s overlay"
+
+use_distribution_backport: True

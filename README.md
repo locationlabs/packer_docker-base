@@ -19,7 +19,7 @@ the 64-bit (amd64), ebs-ssd, hvm image in the us-west-2 region.
 
 A shortcut to find the right AMI:
 ```
-curl -s http://cloud-images.ubuntu.com/query/trusty/server/released.current.txt |grep ebs-ssd |grep amd64 |grep hvm |grep us-west-2 |cut -f8 -d$'\t'
+curl -s http://cloud-images.ubuntu.com/query/xenial/server/released.current.txt |grep ebs-ssd |grep amd64 |grep hvm |grep us-west-2 |cut -f8 -d$'\t'
 ```
 
 ## Source ISO (for Vagrant)

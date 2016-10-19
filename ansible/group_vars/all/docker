@@ -1,7 +1,12 @@
 ---
 
-docker_version: 1.12.1
-requests_version: 2.7.0
+ssh_port: 22
+
+docker_version: 1.12.2
+
+docker_base_extra_python_requirements:
+    - "requests==2.7.0"
+
 docker_py_version: "latest"
 docker_compose_version: "latest"
 
